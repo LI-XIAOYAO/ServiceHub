@@ -14,5 +14,10 @@
         /// 启动时执行
         /// </summary>
         Start,
+
+        /// <summary>
+        /// 检查
+        /// </summary>
+        Check
     }
 }

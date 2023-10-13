@@ -16,12 +16,17 @@ namespace ServiceHub
         /// <summary>
         /// 启动工作路径
         /// </summary>
-        public string StartWorkingDirectory { get; set; }
+        public string StartWorkingDirectory { get; set; } = "";
 
         /// <summary>
         /// 停止工作路径
         /// </summary>
-        public string StopWorkingDirectory { get; set; }
+        public string StopWorkingDirectory { get; set; } = "";
+
+        /// <summary>
+        /// 检查工作路径
+        /// </summary>
+        public string CheckWorkingDirectory { get; set; } = "";
 
         /// <summary>
         /// 状态
@@ -34,6 +39,21 @@ namespace ServiceHub
         public bool StopIt { get; set; }
 
         /// <summary>
+        /// 是否开启检查
+        /// </summary>
+        public bool IsCheck { get; set; }
+
+        /// <summary>
+        /// 检查频率
+        /// </summary>
+        public int CheckDaemon { get; set; }
+
+        /// <summary>
+        /// CheckWords
+        /// </summary>
+        public string CheckWords { get; set; }
+
+        /// <summary>
         /// 启动执行
         /// </summary>
         public CommandConfigs Start { get; set; } = new CommandConfigs(CommandOptions.Start);
@@ -42,6 +62,11 @@ namespace ServiceHub
         /// 停止执行
         /// </summary>
         public CommandConfigs Stop { get; set; } = new CommandConfigs(CommandOptions.Stop);
+
+        /// <summary>
+        /// 检查执行
+        /// </summary>
+        public CommandConfigs Check { get; set; } = new CommandConfigs(CommandOptions.Check);
 
         /// <summary>
         /// 命令配置
