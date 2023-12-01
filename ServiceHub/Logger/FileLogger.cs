@@ -187,22 +187,20 @@ namespace ServiceHub.Logger
             {
                 try
                 {
-                    var date = DateTime.Now.Date.AddDays(-_config.AutoRecoveryBeforeDay.Value);
-                    var paths = Directory.GetDirectories(rootPath ?? _config.AbsolutePath);
-                    foreach (var path in paths)
+                    var date = DateTime.Now.Date.AddDays(-_config.AutoRecoveryBeforeDay.Value + 1);
+                    var targetPath = rootPath ?? _config.AbsolutePath;
+
+                    foreach (var path in Directory.GetDirectories(targetPath))
                     {
-                        if (File.GetCreationTime(path) < date)
+                        RecoveryFiles(path);
+
+                        if (File.GetCreationTime(path) < date && !Directory.GetFiles(targetPath).Any())
                         {
                             Directory.Delete(path);
                         }
-                        else
-                        {
-                            RecoveryFiles(path);
-                        }
                     }
 
-                    var files = Directory.GetFiles(rootPath ?? _config.AbsolutePath);
-                    foreach (var file in files)
+                    foreach (var file in Directory.GetFiles(targetPath))
                     {
                         if (File.GetCreationTime(file) < date)
                         {
